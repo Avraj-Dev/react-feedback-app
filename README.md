@@ -17,8 +17,12 @@ With this project I have learnt (so far...):
 
 ## Installing dependencies
 
-`npm install`
+```bash
+npm install
+```
 
 ## Start application
 
-`npm start`
+```bash
+npm start
+```
