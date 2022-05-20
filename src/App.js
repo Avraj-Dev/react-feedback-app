@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import Header from './components/Header';
 import FeedbackList from './components/FeedbackList';
 import FeedbackStats from './components/FeedbackStats';
@@ -22,6 +23,11 @@ const App = () => {
     localStorage.setItem('dark_mode', darkMode);
   }, [darkMode]);
 
+  const addFeedback = (newFeedback) => {
+    newFeedback.id = uuid();
+    setFeedback([newFeedback, ...feedback]);
+  };
+
   const deleteFeedback = (id) => {
     if (window.confirm('Are you sure you want to delete this feedback?')) {
       setFeedback(feedback.filter((item) => item.id !== id));
@@ -32,7 +38,7 @@ const App = () => {
     <>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
       <div className='container'>
-        <FeedbackForm darkMode={darkMode} />
+        <FeedbackForm darkMode={darkMode} handleAdd={addFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList
           feedback={feedback}

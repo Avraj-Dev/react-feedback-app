@@ -3,7 +3,7 @@ import RatingSelect from './RatingSelect';
 import Card from './shared/Card';
 import Button from './shared/Button';
 
-const FeedbackForm = ({ darkMode }) => {
+const FeedbackForm = ({ darkMode, handleAdd }) => {
   const [text, setText] = useState('');
   const [rating, setRating] = useState(10);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -18,9 +18,24 @@ const FeedbackForm = ({ darkMode }) => {
 
   const handleText = (e) => setText(e.target.value);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,
+        rating,
+      };
+
+      handleAdd(newFeedback);
+
+      setText('');
+    }
+  };
+
   return (
     <Card darkMode={darkMode}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
         <RatingSelect
           darkMode={darkMode}
