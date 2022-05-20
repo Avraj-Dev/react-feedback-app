@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import Header from './components/Header';
 import FeedbackList from './components/FeedbackList';
 import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
+import About from './pages/About';
 
 import FeedbackData from './data/FeedbackData';
 
@@ -37,15 +39,25 @@ const App = () => {
   return (
     <>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-      <div className='container'>
-        <FeedbackForm darkMode={darkMode} handleAdd={addFeedback} />
-        <FeedbackStats feedback={feedback} />
-        <FeedbackList
-          feedback={feedback}
-          darkMode={darkMode}
-          handleDelete={deleteFeedback}
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <>
+              <div className='container'>
+                <FeedbackForm darkMode={darkMode} handleAdd={addFeedback} />
+                <FeedbackStats feedback={feedback} />
+                <FeedbackList
+                  feedback={feedback}
+                  darkMode={darkMode}
+                  handleDelete={deleteFeedback}
+                />
+              </div>
+            </>
+          }
         />
-      </div>
+        <Route path='/about' element={<About />} />
+      </Routes>
     </>
   );
 };
