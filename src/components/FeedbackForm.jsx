@@ -5,7 +5,7 @@ import Button from './shared/Button';
 
 const FeedbackForm = ({ darkMode }) => {
   const [text, setText] = useState('');
-  // const [rating, setRating] = useState(10);
+  const [rating, setRating] = useState(10);
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -22,7 +22,10 @@ const FeedbackForm = ({ darkMode }) => {
     <Card darkMode={darkMode}>
       <form>
         <h2>How would you rate your service with us?</h2>
-        <RatingSelect darkMode={darkMode} />
+        <RatingSelect
+          darkMode={darkMode}
+          select={(value) => setRating(value)}
+        />
         <div className={`input-group ${darkMode && 'reverse'}`}>
           <input
             value={text}
